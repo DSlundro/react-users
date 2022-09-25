@@ -7,7 +7,11 @@ const Form = () => {
 
     const addUserHandler = (e) => {
         e.preventDefault();
+        if(!enteredUsername.trim() || !enteredAge.trim()) return
+        if(enteredAge < 1) return
         console.log(enteredUsername, enteredAge);
+        setEnteredUsername('');
+        setEnteredAge('')
     }
 
     const usernameChangeHandler = (e) => {
@@ -26,14 +30,19 @@ const Form = () => {
             <div id="username" className='flex-col py-3'>
                 <label>Username</label>
                 <div>
-                    <input type="text" onChange={usernameChangeHandler} />
+                    <input type="text" 
+                    value={enteredUsername}
+                    onChange={usernameChangeHandler} />
                 </div>
             </div>
 
             <div id="age" className='flex-col py-3'>
                 <label>Age (Years)</label>
                 <div>
-                    <input type="text" onChange={ageChangeHandler} />
+                    <input type="number" 
+                    min='1'
+                    value={enteredAge}
+                    onChange={ageChangeHandler} />
                 </div>
             </div>
 
