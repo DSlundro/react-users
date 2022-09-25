@@ -1,0 +1,21 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  * {@apply box-border p-0 m-0;}
+  body{@apply bg-black;}
+}
+
+@layer components {
+
+  input {
+    @apply p-1 rounded-lg w-full
+    border border-zinc-200
+    ;
+  }
+
+
+}
