@@ -1,10 +1,10 @@
-import Form from "./components/Form";
+import AddUser from "./components/Users/AddUser";
 
 
 function App() {
   return (
     <section className="flex justify-center pt-8">
-      <Form />
+      <AddUser />
     </section>
   );
 }
