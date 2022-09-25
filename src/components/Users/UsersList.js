@@ -3,7 +3,7 @@ const UsersList = (props) => {
 
     return (
         <ul
-        className="flex-col bg-white p-5 rounded-xl my-4 w-full max-w-xl font-medium"
+        className="flex-col mx-auto bg-white p-5 rounded-xl my-4 w-full max-w-xl font-medium"
         >
             {props.users.map( user => 
                 <li

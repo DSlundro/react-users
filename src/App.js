@@ -14,7 +14,7 @@ function App() {
 
 
   return (
-    <section className="flex-col justify-center pt-8">
+    <section className='flex-col'>
       <AddUser onAddUser={setUsersListHandler}/>
       <UsersList users={usersList}/>
     </section>
