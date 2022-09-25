@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const Form = () => {
+const Form = (props) => {
     const [enteredUsername, setEnteredUsername] = useState('')
     const [enteredAge, setEnteredAge] = useState('')
 
@@ -12,6 +12,7 @@ const Form = () => {
         console.log(enteredUsername, enteredAge);
         setEnteredUsername('');
         setEnteredAge('')
+        props.onAddUser(enteredUsername, enteredAge)
     }
 
     const usernameChangeHandler = (e) => {
@@ -22,11 +23,10 @@ const Form = () => {
         setEnteredAge(e.target.value)
     }
 
-
     return (
         <form 
         onSubmit={addUserHandler}
-        className="flex-col bg-white p-5  w-full max-w-xl font-bold">
+        className="flex-col bg-white p-5 rounded-xl w-full max-w-xl font-bold">
             <div id="username" className='flex-col py-3'>
                 <label>Username</label>
                 <div>
