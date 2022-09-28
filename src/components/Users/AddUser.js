@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ErrorModal from "../UI/ErrorModal";
 
 
 const Form = (props) => {
-    const [enteredUsername, setEnteredUsername] = useState('')
-    const [enteredAge, setEnteredAge] = useState('')
+
+    let nameInputRef = useRef();
+    let ageInputRef = useRef();
+
     const [error, setError] = useState()
 
     const addUserHandler = (e) => {
         e.preventDefault();
-        if(!enteredUsername.trim() || !enteredAge.trim()) {
+        
+        // REFT
+        let refName = nameInputRef.current.value;
+        let refAge = ageInputRef.current.value;
+
+        console.log(refName, refAge);
+
+        if(!refName.trim() || !refAge.trim()) {
             setError({
                 title: 'Invalid input',
                 message: 'Please enter a valid name and age (non-empty values).'
@@ -17,7 +26,7 @@ const Form = (props) => {
             console.log(error);
             return;
         }
-        if(+enteredAge < 1) {
+        if(+refAge < 1) {
             setError({
                 title: 'Invalid input',
                 message: 'Please enter a number > 0.'
@@ -25,17 +34,10 @@ const Form = (props) => {
             console.log(error);
             return;
         }
-        setEnteredUsername('');
-        setEnteredAge('')
-        props.onAddUser(enteredUsername, enteredAge)
-    }
 
-    const usernameChangeHandler = (e) => {
-        setEnteredUsername(e.target.value)
-    }
-
-    const ageChangeHandler = (e) => {
-        setEnteredAge(e.target.value)
+        props.onAddUser(refName, refAge);
+        nameInputRef.current.value = '';
+        ageInputRef.current.value = '';
     }
 
     const errorHandler = () => {
@@ -48,9 +50,10 @@ const Form = (props) => {
             {
                 error && 
                 <ErrorModal 
-                onErrorHandler={errorHandler}
-                title={error.title} 
-                message={error.message}/>
+                    title={error.title} 
+                    message={error.message}
+                    onConfirm={errorHandler}
+                />
             }
 
             <form 
@@ -59,18 +62,20 @@ const Form = (props) => {
                 <div id="username" className='flex-col py-3'>
                     <label>Username</label>
                     <div>
-                        <input type="text" 
-                        value={enteredUsername}
-                        onChange={usernameChangeHandler} />
+                        <input 
+                            type="text" 
+                            ref={nameInputRef} 
+                        />
                     </div>
                 </div>
 
                 <div id="age" className='flex-col py-3'>
                     <label>Age (Years)</label>
                     <div>
-                        <input type="number" 
-                        value={enteredAge}
-                        onChange={ageChangeHandler} />
+                        <input 
+                            type="number" 
+                            ref={ageInputRef}
+                        />
                     </div>
                 </div>
 
